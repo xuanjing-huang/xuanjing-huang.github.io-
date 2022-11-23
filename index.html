@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>homepage-xjhuang.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="xuanjing-huang-%E9%BB%84%E8%90%B1%E8%8F%81">Xuanjing Huang (黄萱菁)</h2>
+<img src="https://s1.ax1x.com/2022/11/23/z8symn.jpg" width = "20%" align="right" />
+<h4 id="professor-of-computer-science">Professor of Computer Science</h4>
+<h4 id="fudan-lab-for-nlp"><a href="https://nlp.fudan.edu.cn/nlpen/main.htm">Fudan Lab for NLP</a></h4>
+<h4 id="fudan-university"><a href="http://www.fudan.edu.cn/en/">Fudan University</a></h4>
+<h2 id="biography">Biography</h2>
+<p>Xuanjing Huang is a Professor at the School of Computer Science, Fudan University, Shanghai, China. She obtained her Ph.D. degree in Computer Science from Fudan University in 1998. From 2008 to 2009, she was a visiting scholar at <a href="ciir.cs.umass.edu">CIIR, UMass Amherst</a>.</p>
+<p>Xuanjing's research interest includes natural language processing and information retrieval, with a particular interest in sentiment analysis, information extraction, pre-trained language models, robustness, and interpretability in NLP. She has published over 150 papers in major NLP, AI, and IR conferences/journals. She has received an outstanding paper award at ACL 2017, an area chair favorites award at COLING 2018, the best paper award at CCL 2019, and an outstanding paper award at COLING 2022.</p>
+<p>In the research community, Xuanjing is the conference officer at <a href="https://aaclweb.org/officers/index.html">the AACL executive board</a>, a steering committee member of SIGIR-AP, and a senior action editor of ARR. She has also served as a Program Co-Chair of <a href="http://2021.emnlp.org">EMNLP 2021</a>, <a href="http://www.cips-cl.org/static/CCL2019/en/index.html">CCL 2019</a>, and <a href="http://tcci.ccf.org.cn/conference/2017/">NLPCC 2017</a>, and a General Co-Chair of <a href="http://tcci.ccf.org.cn/conference/2020">NLPCC 2020</a>, Co-organizer of WSDM 2015, Competition Chair of CIKM 2014, and AC, SPC or PC member of recent WSDM, SIGIR, TheWebConf, CIKM, ACL, IJCAI, KDD, EMNLP, COLING and many other conferences.</p>
+<h2 id="contact">Contact</h2>
+<ul>
+<li>Email: xjhuang@fudan.edu.cn</li>
+<li>School of Computer Science</li>
+<li>Interdisciplinary Building No.2, Fudan University (Jiangwan Campus)</li>
+<li>Songhu Road 2005, Shanghai 200438, China</li>
+</ul>
+<h2 id="recent-publications">Recent Publications</h2>
+<p>Recent publications can be found at <a href="https://dblp.org/pid/05/6735">Computer Science Bibliography</a>, <a href="https://aclweb.org/anthology/people/x/xuan-jing-huang/">ACL Anthology</a>, <a href="https://www.semanticscholar.org/author/1790227">Semantic Scholar profile</a>, or <a href="https://scholar.google.com/citations?user=RGsMgZA4H78C">Google Scholar profile</a>.</p>
+<h2 id="recent-invited-talks">Recent Invited Talks</h2>
+<ul>
+<li><em>Incorporating Dynamic Structures into Pre-trained Language Models</em>, Workshop on Dynamic Neural Networks, ICML 2022</li>
+<li><em>Text Sentiment Computing</em>, World Artificial Intelligence Conference, Jul. 2021, Shanghai</li>
+<li><em>Interpretability Analysis in NLP</em>, 2020 Annual Conference on CCF Task Force on Speech Dialogue and Auditory Processing, Oct. 2020, Beijing</li>
+<li><em>Representation learning in natural language processing</em>, Women in AI, 2020 BAAI Conference, June 2020, Beijing</li>
+<li><em>Deep Representation Learning in Natural Language Processing</em>, IALP 2019, Nov. 2019, Shanghai</li>
+<li><em>Text Generation based on Deep Learning</em>, 2018 Symposium on Knowledge Engineering and QA Technology, Jul. 2018, Nanjing</li>
+<li><em>Representation Learning in Natural Language Understanding</em>, AI Shanghai, May 2018, Shanghai</li>
+<li><em>New Method on Word Segmentation and POS Tagging</em>, Strategic Symposium on Natural Language Processing, Apr. 2018, Dali</li>
+<li><em>Deep Representation Learning in Natural Language Processing and its Applications</em>, 2017 Symposium on Knowledge Engineering and QA Technology, Dec. 2017, Nanjing</li>
+<li><em>Deep Learning for Natural Language Processing</em>, 2016 International Conference on Data Science, Dec. 2016, Shanghai</li>
+<li><em>Web based Social Recommendation</em>, The 5th National Conference of Social Media Processing, Oct. 2016, Nanchang</li>
+</ul>
+<h2 id="awards">Awards</h2>
+<ul>
+<li>A Multi-Format Transfer Learning Model for Event Argument Extraction via Variational Information Bottleneck, COLING 2022 Outstanding Paper Award</li>
+<li>Aminer &quot;Women in AI&quot;, 2020</li>
+<li>Aminer &quot;Most Influential Scholar Award Honorable Mention&quot;, 2020</li>
+<li>Forbes China &quot;Women in Tech&quot;, 2020</li>
+<li>How to Fine-Tune BERT for Text Classification?, CCL 2019 Best Paper Award</li>
+<li>A Lexicon-Based Supervised Attention Model for Neural Sentiment Analysis, COLING 2018 Area Chair Favorites</li>
+<li>Adversarial Multi-Criteria Learning for Chinese Word Segmentation, ACL 2017 Outstanding Paper Award</li>
+</ul>
+<h2 id="professional-activities">Professional Activities</h2>
+<h3 id="committee-membership">Committee Membership</h3>
+<ul>
+<li><a href="http://tcci.ccf.org.cn/">Technical Committee on Natural Language Processing of CCF</a></li>
+<li><a href="http://www.cips-smp.org/">Technical Committee on Social Media Processing of CIPSC</a></li>
+<li><a href="http://cips-cl.org/">Technical Committee on Computational Linguistic of CIPSC</a></li>
+<li>Technical Committee on Information Retrieval of CIPSC</li>
+<li>Technical Committee on Natural Language Understanding of CAAI</li>
+<li><a href="http://www.aclweb.org/">Association for Computational Linguistics</a></li>
+<li><a href="http://aaclweb.org/officers/index.html"> Asia-Pacific Chapter of the Association for Computational Linguistics (AACL)</a></li>
+<li><a href="https://www.acm.org/">Association for Computing Machinery</a></li>
+</ul>
+<h3 id="conference-organizing-committee">Conference Organizing Committee</h3>
+<ul>
+<li><a href="http://2021.emnlp.org">EMNLP 2021</a>, Program Co-chair</li>
+<li><a href="http://tcci.ccf.org.cn/conference/2020">NLPCC 2020</a>, General Co-chair</li>
+<li><a href="http://www.cips-cl.org/static/CCL2019/en/index.html">CCL 2019</a>, Program Co-Chair</li>
+<li><a href="http://tcci.ccf.org.cn/conference/2017/">NLPCC 2017</a>, Program Co-Chair</li>
+<li>IJCNLP 2017, Publicity Chair</li>
+<li>CCL 2016, Program Co-Chair</li>
+<li>CIPS-ATT 2016, Program Chair</li>
+<li>NLPCC-ICCPOL 2016, Publication Chair</li>
+<li>SMP 2015, Program Co-Chair</li>
+<li>WSDM 2015, Co-organizer</li>
+<li>NLPCC 2015, Tutorial Chair</li>
+<li>CIKM 2014, Competition Chair</li>
+<li>SMP 2014, Program Co-Chair</li>
+</ul>
+<h3 id="conference-ac-spc-or-pc">Conference AC, SPC or PC</h3>
+<ul>
+<li>ACL (2013-2022)</li>
+<li>EMNLP (2010, 2013-2022)</li>
+<li>NAACL (2016-2021)</li>
+<li>COLING (2010, 2014-2020)</li>
+<li>AAAI (2019-2022)</li>
+<li>IJCAI (2013, 2016-2021)</li>
+<li>SIGIR (2011,2014-2018, 2020-2022)</li>
+<li>TheWebConf (2012-2013, 2015-2016, 2018, 2020-2023)</li>
+<li>CIKM (2011-2013, 2017-2020)</li>
+<li>WSDM (2012, 2015-2021, 2023)</li>
+<li>ICTIR (2020-2022)</li>
+<li>KDD (2015-2016, 2020-2021)</li>
+<li>NeurIPS (2020, 2022)</li>
+<li>ICML (2021-2022)</li>
+<li>ICLR (2021, 2023)</li>
+</ul>
+<h3 id="action-editor-guest-editor-or-referee">Action Editor, Guest Editor or Referee</h3>
+<ul>
+<li>Computational Linguistics</li>
+<li>Transactions of the Association for Computational Linguistics</li>
+<li>IEEE/ACM Transactions on Audio, Speech and Language Processing</li>
+<li>ACM Transactions on Asian and Low-Resource Language Information Processing</li>
+<li>ACM Transactions on Intelligent Systems and Technology</li>
+<li>IEEE Transactions on Knowledge and Data Engineering</li>
+<li>Information Processing and Management</li>
+<li>Special Section on Social Media Processing, Science China Information Sciences</li>
+<li>Special Section on Deep Learning, Journal of Computer Science and Technology</li>
+</ul>
+<h2 id="research-grants-since-2015">Research Grants (since 2015)</h2>
+<ul>
+<li>Principal Investigator:	<em>Structural and Semantics Analysis for Internet Language Based on Deep Neural Networks</em>, National Natural Science Foundation of China, 2020-2023</li>
+<li>Principal Investigator:	<em>Research of intelligent decision making technology of big data assistance program for released prisoners based on resettlement, assistance and education status</em>, National Key Research and Development Program of ChinaNational, 2018-2021</li>
+<li>Participant:	<em>Big Data driven Natural Language Understanding, QA and Translation</em>, National Key Research and Development Program of ChinaNational, 2017-2021</li>
+<li>Participant:	<em>Deep Chinese Semantic Computing and Reading Comprehension</em>, Natural Science Foundation of China, 2018-2020</li>
+<li>Participant:	<em>Search Intent Understand, Representation and Matching</em>, Natural Science Foundation of China, 2016-2020</li>
+<li>Principal Investigator:	<em>Integrating Text Content and Structure in Topic Analysis</em>, National Natural Science Foundation of China, 2015-2018</li>
+<li>Participant: <em>Key Technology and System to Solve Elementary Mathematics Problems</em>, 863 High-tech Project, 2015-2017</li>
+</ul>
+<h2 id="teaching">Teaching</h2>
+<ul>
+<li>Computational Thinking, for UG students</li>
+<li>Chinese Information Processing, for UG students</li>
+<li>Computer Science and Internet, for UG students</li>
+<li>Natural Language Processing, for PG students</li>
+</ul>
+
+</body>
+</html>
