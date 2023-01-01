@@ -1,390 +1,284 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Xuanjing Huang</title>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-
-<style>
-/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-body {
-	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
-	font-size: var(--vscode-markdown-font-size, 14px);
-	padding: 0 26px;
-	line-height: var(--vscode-markdown-line-height, 22px);
-	word-wrap: break-word;
-}
-
-#code-csp-warning {
-	position: fixed;
-	top: 0;
-	right: 0;
-	color: white;
-	margin: 16px;
-	text-align: center;
-	font-size: 12px;
-	font-family: sans-serif;
-	background-color:#444444;
-	cursor: pointer;
-	padding: 6px;
-	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
-}
-
-#code-csp-warning:hover {
-	text-decoration: none;
-	background-color:#007acc;
-	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
-}
-
-body.scrollBeyondLastLine {
-	margin-bottom: calc(100vh - 22px);
-}
-
-body.showEditorSelection .code-line {
-	position: relative;
-}
-
-body.showEditorSelection .code-active-line:before,
-body.showEditorSelection .code-line:hover:before {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 0;
-	left: -12px;
-	height: 100%;
-}
-
-body.showEditorSelection li.code-active-line:before,
-body.showEditorSelection li.code-line:hover:before {
-	left: -30px;
-}
-
-.vscode-light.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(0, 0, 0, 0.15);
-}
-
-.vscode-light.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(0, 0, 0, 0.40);
-}
-
-.vscode-light.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-.vscode-dark.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(255, 255, 255, 0.4);
-}
-
-.vscode-dark.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(255, 255, 255, 0.60);
-}
-
-.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-.vscode-high-contrast.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(255, 160, 0, 0.7);
-}
-
-.vscode-high-contrast.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(255, 160, 0, 1);
-}
-
-.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-img {
-	max-width: 100%;
-	max-height: 100%;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-a:focus,
-input:focus,
-select:focus,
-textarea:focus {
-	outline: 1px solid -webkit-focus-ring-color;
-	outline-offset: -1px;
-}
-
-hr {
-	border: 0;
-	height: 2px;
-	border-bottom: 2px solid;
-}
-
-h1 {
-	padding-bottom: 0.3em;
-	line-height: 1.2;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-}
-
-h1, h2, h3 {
-	font-weight: normal;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-table > thead > tr > th {
-	text-align: left;
-	border-bottom: 1px solid;
-}
-
-table > thead > tr > th,
-table > thead > tr > td,
-table > tbody > tr > th,
-table > tbody > tr > td {
-	padding: 5px 10px;
-}
-
-table > tbody > tr + tr > td {
-	border-top: 1px solid;
-}
-
-blockquote {
-	margin: 0 7px 0 5px;
-	padding: 0 16px 0 10px;
-	border-left-width: 5px;
-	border-left-style: solid;
-}
-
-code {
-	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
-	font-size: 1em;
-	line-height: 1.357em;
-}
-
-body.wordWrap pre {
-	white-space: pre-wrap;
-}
-
-pre:not(.hljs),
-pre.hljs code > div {
-	padding: 16px;
-	border-radius: 3px;
-	overflow: auto;
-}
-
-pre code {
-	color: var(--vscode-editor-foreground);
-	tab-size: 4;
-}
-
-/** Theming */
-
-.vscode-light pre {
-	background-color: rgba(220, 220, 220, 0.4);
-}
-
-.vscode-dark pre {
-	background-color: rgba(10, 10, 10, 0.4);
-}
-
-.vscode-high-contrast pre {
-	background-color: rgb(0, 0, 0);
-}
-
-.vscode-high-contrast h1 {
-	border-color: rgb(0, 0, 0);
-}
-
-.vscode-light table > thead > tr > th {
-	border-color: rgba(0, 0, 0, 0.69);
-}
-
-.vscode-dark table > thead > tr > th {
-	border-color: rgba(255, 255, 255, 0.69);
-}
-
-.vscode-light h1,
-.vscode-light hr,
-.vscode-light table > tbody > tr + tr > td {
-	border-color: rgba(0, 0, 0, 0.18);
-}
-
-.vscode-dark h1,
-.vscode-dark hr,
-.vscode-dark table > tbody > tr + tr > td {
-	border-color: rgba(255, 255, 255, 0.18);
-}
-
-</style>
-
-<style>
-/* Tomorrow Theme */
-/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
-/* Original theme - https://github.com/chriskempson/tomorrow-theme */
-
-/* Tomorrow Comment */
-.hljs-comment,
-.hljs-quote {
-	color: #8e908c;
-}
-
-/* Tomorrow Red */
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag,
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-regexp,
-.hljs-deletion {
-	color: #c82829;
-}
-
-/* Tomorrow Orange */
-.hljs-number,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-literal,
-.hljs-type,
-.hljs-params,
-.hljs-meta,
-.hljs-link {
-	color: #f5871f;
-}
-
-/* Tomorrow Yellow */
-.hljs-attribute {
-	color: #eab700;
-}
-
-/* Tomorrow Green */
-.hljs-string,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-addition {
-	color: #718c00;
-}
-
-/* Tomorrow Blue */
-.hljs-title,
-.hljs-section {
-	color: #4271ae;
-}
-
-/* Tomorrow Purple */
-.hljs-keyword,
-.hljs-selector-tag {
-	color: #8959a8;
-}
-
-.hljs {
-	display: block;
-	overflow-x: auto;
-	color: #4d4d4c;
-	padding: 0.5em;
-}
-
-.hljs-emphasis {
-	font-style: italic;
-}
-
-.hljs-strong {
-	font-weight: bold;
-}
-</style>
-
-<style>
-/*
- * Markdown PDF CSS
+<!DOCTYPE html><html><head>
+      <title>Xuanjing Huang</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
  */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
 
- body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
-	padding: 0 12px;
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
-pre {
-	background-color: #f8f8f8;
-	border: 1px solid #cccccc;
-	border-radius: 3px;
-	overflow-x: auto;
-	white-space: pre-wrap;
-	overflow-wrap: break-word;
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
 }
 
-pre:not(.hljs) {
-	padding: 23px;
-	line-height: 19px;
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
 }
 
-blockquote {
-	background: rgba(127, 127, 127, 0.1);
-	border-color: rgba(0, 122, 204, 0.5);
+.token.comment,
+.token.blockquote {
+  color: #969896;
 }
 
-.emoji {
-	height: 1.4em;
+.token.cdata {
+  color: #183691;
 }
 
-code {
-	font-size: 14px;
-	line-height: 19px;
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
 }
 
-/* for inline code */
-:not(pre):not(.hljs) > code {
-	color: #C9AE75; /* Change the old color so it seems less like an error */
-	font-size: inherit;
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
 }
 
-/* Page Break : use <div class="page"/> to insert page break
--------------------------------------------------------- */
-.page {
-	page-break-after: always;
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
 }
 
-</style>
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
 
-<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
-</head>
-<body>
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
-          ? 'dark'
-          : 'default'
-    });
-  </script>
-<h2 id="xuanjing-huang-%E9%BB%84%E8%90%B1%E8%8F%81">Xuanjing Huang (黄萱菁)</h2>
-<img src="https://s1.ax1x.com/2022/11/23/z8symn.jpg" width = "20%" align="right" />
-<h4 id="professor-of-computer-science">Professor of Computer Science</h4>
-<h4 id="fudan-lab-for-nlp"><a href="https://nlp.fudan.edu.cn/nlpen/main.htm">Fudan Lab for NLP</a></h4>
-<h4 id="school-of-computer-science"><a href="http://www.cs.fudan.edu.cn/">School of Computer Science</a></h4>
-<h4 id="fudan-university"><a href="http://www.fudan.edu.cn/en/">Fudan University</a></h4>
-<h2 id="biography">Biography</h2>
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h2 class="mume-header" id="xuanjing-huang-%E9%BB%84%E8%90%B1%E8%8F%81">Xuanjing Huang (&#x9EC4;&#x8431;&#x83C1;)</h2>
+
+<hr>
+<img src="800.jpg" width="25%" align="right">
+<h4 class="mume-header" id="professor-of-computer-science">Professor of Computer Science</h4>
+
+<h4 class="mume-header" id="fudan-lab-for-nlphttpsnlpfudaneducnnlpenmainhtm"><a href="https://nlp.fudan.edu.cn/nlpen/main.htm">Fudan Lab for NLP</a></h4>
+
+<h4 class="mume-header" id="fudan-universityhttpwwwfudaneducnen"><a href="http://www.fudan.edu.cn/en/">Fudan University</a></h4>
+
+<h2 class="mume-header" id="about-me">About me</h2>
+
 <p>Xuanjing Huang is a Professor at the School of Computer Science, <a href="http://www.fudan.edu.cn/en/">Fudan University</a>, Shanghai, China. She obtained her Ph.D. degree in Computer Science from Fudan University in 1998. She was a visiting scholar at <a href="ciir.cs.umass.edu">CIIR, UMass Amherst</a> from 2008 to 2009.</p>
 <p>Xuanjing Huang works on natural language processing and information retrieval, with a particular interest in sentiment analysis, information extraction, pre-trained language models, robustness, and interpretability in NLP. She has published over 150 papers in major NLP, AI, and IR conferences and journals. She has received an outstanding paper award at ACL 2017, an area chair favorites award at COLING 2018, the best paper award at CCL 2019, and an outstanding paper award at COLING 2022.</p>
-<p>In the research community, Xuanjing is the conference officer at <a href="https://aaclweb.org/officers/index.html">the AACL executive board</a>, a steering committee member of SIGIR-AP, and a senior action editor of ARR. She has also served as a Program Co-Chair of <a href="http://2021.emnlp.org">EMNLP 2021</a>, <a href="http://www.cips-cl.org/static/CCL2019/en/index.html">CCL 2019</a>, and <a href="http://tcci.ccf.org.cn/conference/2017/">NLPCC 2017</a>, and a General Co-Chair of <a href="http://tcci.ccf.org.cn/conference/2020">NLPCC 2020</a>, Co-organizer of WSDM 2015, Competition Chair of CIKM 2014, and AC, SPC or PC member of recent WSDM, SIGIR, TheWebConf, CIKM, ACL, IJCAI, KDD, EMNLP, COLING and many other conferences.</p>
-<h2 id="contact">Contact</h2>
+<p>In the research community, Xuanjing is the conference officer at <a href="https://aaclweb.org/officers/index.html">the AACL executive board</a>, a steering committee member of SIGIR-AP, and a senior action editor of ARR. She has also served as a Program Co-Chair of SIGIR-AP 2023, <a href="http://2021.emnlp.org">EMNLP 2021</a>, <a href="http://www.cips-cl.org/static/CCL2019/en/index.html">CCL 2019</a>, and <a href="http://tcci.ccf.org.cn/conference/2017/">NLPCC 2017</a>, and a General Co-Chair of <a href="http://tcci.ccf.org.cn/conference/2020">NLPCC 2020</a>, Co-organizer of WSDM 2015, Competition Chair of CIKM 2014, and AC, SPC or PC member of recent WSDM, SIGIR, TheWebConf, CIKM, ACL, IJCAI, KDD, EMNLP, COLING and many other conferences.</p>
+<h2 class="mume-header" id="contact">Contact</h2>
+
 <ul>
-<li>Email: xjhuang@fudan.edu.cn</li>
-<li>School of Computer Science</li>
-<li>Interdisciplinary Building No.2, Fudan University (Jiangwan Campus)</li>
+<li>Email: <a href="mailto:xjhuang@fudan.edu.cn">xjhuang@fudan.edu.cn</a></li>
+<li>School of Computer Science, Interdisciplinary Building No.2, Fudan University (Jiangwan Campus)</li>
 <li>Songhu Road 2005, Shanghai 200438, China</li>
 </ul>
-<h2 id="recent-publications">Recent Publications</h2>
-<p>Xuanjing Huang's recent publications can be found at <a href="https://dblp.org/pid/05/6735">Computer Science Bibliography</a>, <a href="https://aclweb.org/anthology/people/x/xuan-jing-huang/">ACL Anthology</a>, <a href="https://www.semanticscholar.org/author/1790227">Semantic Scholar profile</a>, or <a href="https://scholar.google.com/citations?user=RGsMgZA4H78C">Google Scholar profile</a>.</p>
-<h2 id="recent-invited-talks">Recent Invited Talks</h2>
+<h2 class="mume-header" id="recent-publications">Recent Publications</h2>
+
+<p>Xuanjing Huang&apos;s recent publications can be found at <a href="https://dblp.org/pid/05/6735">Computer Science Bibliography</a>, <a href="https://aclweb.org/anthology/people/x/xuan-jing-huang/">ACL Anthology</a>, <a href="https://www.semanticscholar.org/author/1790227">Semantic Scholar</a>, or <a href="https://scholar.google.com/citations?user=RGsMgZA4H78C">Google Scholar</a>.</p>
+<h2 class="mume-header" id="recent-invited-talks">Recent Invited Talks</h2>
+
 <ul>
 <li><em>Incorporating Dynamic Structures into Pre-trained Language Models</em>, Workshop on Dynamic Neural Networks, ICML 2022</li>
 <li><em>Text Sentiment Computing</em>, World Artificial Intelligence Conference, Jul. 2021, Shanghai</li>
@@ -398,7 +292,8 @@ code {
 <li><em>Deep Learning for Natural Language Processing</em>, 2016 International Conference on Data Science, Dec. 2016, Shanghai</li>
 <li><em>Web based Social Recommendation</em>, The 5th National Conference of Social Media Processing, Oct. 2016, Nanchang</li>
 </ul>
-<h2 id="awards">Awards</h2>
+<h2 class="mume-header" id="awards">Awards</h2>
+
 <ul>
 <li>A Multi-Format Transfer Learning Model for Event Argument Extraction via Variational Information Bottleneck, COLING 2022 Outstanding Paper Award</li>
 <li>Excellent Supervisor for Graduate Students, Fudan University, 2022</li>
@@ -409,8 +304,10 @@ code {
 <li>A Lexicon-Based Supervised Attention Model for Neural Sentiment Analysis, COLING 2018 Area Chair Favorites</li>
 <li>Adversarial Multi-Criteria Learning for Chinese Word Segmentation, ACL 2017 Outstanding Paper Award</li>
 </ul>
-<h2 id="professional-activities">Professional Activities</h2>
-<h3 id="committee-membership">Committee Membership</h3>
+<h2 class="mume-header" id="professional-activities">Professional Activities</h2>
+
+<h3 class="mume-header" id="committee-membership">Committee Membership</h3>
+
 <ul>
 <li><a href="http://tcci.ccf.org.cn/">Technical Committee on Natural Language Processing of CCF</a></li>
 <li><a href="http://cips-cl.org/">Technical Committee on Computational Linguistic of CIPSC</a></li>
@@ -421,8 +318,10 @@ code {
 <li><a href="http://aaclweb.org/officers/index.html"> Asia-Pacific Chapter of the Association for Computational Linguistics (AACL)</a></li>
 <li><a href="https://www.acm.org/">Association for Computing Machinery</a></li>
 </ul>
-<h3 id="conference-organizing-committee">Conference Organizing Committee</h3>
+<h3 class="mume-header" id="conference-organizing-committee">Conference Organizing Committee</h3>
+
 <ul>
+<li>SIGIR-AP 2023, Program Co-chair</li>
 <li><a href="http://2021.emnlp.org">EMNLP 2021</a>, Program Co-chair</li>
 <li><a href="http://tcci.ccf.org.cn/conference/2020">NLPCC 2020</a>, General Co-chair</li>
 <li><a href="http://www.cips-cl.org/static/CCL2019/en/index.html">CCL 2019</a>, Program Co-Chair</li>
@@ -437,10 +336,11 @@ code {
 <li>CIKM 2014, Competition Chair</li>
 <li>SMP 2014, Program Co-Chair</li>
 </ul>
-<h3 id="conference-ac-spc-or-pc">Conference AC, SPC or PC</h3>
+<h3 class="mume-header" id="conference-ac-spc-or-pc">Conference AC, SPC or PC</h3>
+
 <ul>
 <li>ACL Rolling Review (2022)</li>
-<li>ACL (2013-2022)</li>
+<li>ACL (2013-2023)</li>
 <li>EMNLP (2010, 2013-2022)</li>
 <li>NAACL (2016-2021)</li>
 <li>COLING (2010, 2014-2020)</li>
@@ -453,32 +353,43 @@ code {
 <li>ICTIR (2020-2022)</li>
 <li>KDD (2015-2016, 2020-2021)</li>
 <li>NeurIPS (2020, 2022)</li>
-<li>ICML (2021-2022)</li>
+<li>ICML (2021-2023)</li>
 <li>ICLR (2021, 2023)</li>
 </ul>
-<h3 id="action-editor-guest-editor-or-referee">Action Editor, Guest Editor or Referee</h3>
+<h3 class="mume-header" id="associate-editor-or-action-editor">Associate Editor or Action Editor</h3>
+
 <ul>
+<li>Artificial Intelligence</li>
 <li>Computational Linguistics</li>
+<li>Science China Information Sciences (&#x4E2D;&#x56FD;&#x79D1;&#x5B66;: &#x4FE1;&#x606F;&#x79D1;&#x5B66;)</li>
+<li>Journal of Computer Research and Development (&#x8BA1;&#x7B97;&#x673A;&#x7814;&#x7A76;&#x4E0E;&#x53D1;&#x5C55;)</li>
+<li>Journal of Software (&#x8F6F;&#x4EF6;&#x5B66;&#x62A5;)</li>
+<li>Journal of Chinese Information Processing (&#x4E2D;&#x6587;&#x4FE1;&#x606F;&#x5B66;&#x62A5;)</li>
+</ul>
+<h3 class="mume-header" id="journal-referee">Journal referee</h3>
+
+<ul>
 <li>Transactions of the Association for Computational Linguistics</li>
 <li>IEEE/ACM Transactions on Audio, Speech and Language Processing</li>
 <li>ACM Transactions on Asian and Low-Resource Language Information Processing</li>
-<li>ACM Transactions on Intelligent Systems and Technology</li>
 <li>IEEE Transactions on Knowledge and Data Engineering</li>
 <li>Information Processing and Management</li>
-<li>Special Section on Social Media Processing, Science China Information Sciences</li>
-<li>Special Section on Deep Learning, Journal of Computer Science and Technology</li>
+<li>ACM Transactions on Intelligent Systems and Technology</li>
 </ul>
-<h2 id="research-grants-since-2015">Research Grants (since 2015)</h2>
+<h2 class="mume-header" id="research-grants">Research Grants</h2>
+
 <ul>
-<li>Principal Investigator:	<em>Structural and Semantics Analysis for Internet Language Based on Deep Neural Networks</em>, National Natural Science Foundation of China, 2020-2023</li>
-<li>Principal Investigator:	<em>Research of intelligent decision making technology of big data assistance program for released prisoners based on resettlement, assistance and education status</em>, National Key Research and Development Program of ChinaNational, 2018-2021</li>
-<li>Participant:	<em>Big Data driven Natural Language Understanding, QA and Translation</em>, National Key Research and Development Program of ChinaNational, 2017-2021</li>
-<li>Participant:	<em>Deep Chinese Semantic Computing and Reading Comprehension</em>, Natural Science Foundation of China, 2018-2020</li>
-<li>Participant:	<em>Search Intent Understand, Representation and Matching</em>, Natural Science Foundation of China, 2016-2020</li>
-<li>Principal Investigator:	<em>Integrating Text Content and Structure in Topic Analysis</em>, National Natural Science Foundation of China, 2015-2018</li>
-<li>Participant: <em>Key Technology and System to Solve Elementary Mathematics Problems</em>, 863 High-tech Project, 2015-2017</li>
+<li>Principal Investigator&#xFF0C;<em>Research on the New Paradigm of Pluggable and Robust Pre-training Model for Smart Healthcare</em>, Sponsored by Program of Shanghai Academic Research Leader, 2022-2025</li>
+<li>Principal Investigator:	<em>Structural and Semantics Analysis for Internet Language Based on Deep Neural Networks</em>, Sponsored by National Natural Science Foundation of China, 2020-2023</li>
+<li>Principal Investigator:	<em>Research of intelligent decision making technology of big data assistance program for released prisoners based on resettlement, assistance and education status</em>, Sponsored by National Key Research and Development Program of China, 2018-2021</li>
+<li>Participant:	<em>Big Data driven Natural Language Understanding, QA and Translation</em>, Sponsored by National Key Research and Development Program of ChinaNational, 2017-2021</li>
+<li>Participant:	<em>Deep Chinese Semantic Computing and Reading Comprehension</em>, Sponsored by Natural Science Foundation of China, 2018-2020</li>
+<li>Participant:	<em>Search Intent Understand, Representation and Matching</em>, Sponsored by Natural Science Foundation of China, 2016-2020</li>
+<li>Principal Investigator:	<em>Integrating Text Content and Structure in Topic Analysis</em>, Sponsored by National Natural Science Foundation of China, 2015-2018</li>
+<li>Participant: <em>Key Technology and System to Solve Elementary Mathematics Problems</em>, Sponsored by 863 High-tech Project of China, 2015-2017</li>
 </ul>
-<h2 id="teaching">Teaching</h2>
+<h2 class="mume-header" id="teaching">Teaching</h2>
+
 <ul>
 <li>Computational Thinking, for UG students</li>
 <li>Chinese Information Processing, for UG students</li>
@@ -486,5 +397,16 @@ code {
 <li>Natural Language Processing, for PG students</li>
 </ul>
 
-</body>
-</html>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
